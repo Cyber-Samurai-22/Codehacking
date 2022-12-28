@@ -52,4 +52,10 @@ class User extends Authenticatable
     public function photo(){
         return $this->belongsTo('App\Models\Photo');
     }
+
+    public function setPasswordAttribute(){
+        if(!empty($password)){
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
 }
