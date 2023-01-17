@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostsController;
 use App\Http\Controllers\AdminUsersController;
 use App\Models\Role;
 use App\Models\User;
@@ -25,10 +26,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin', function(){
-   return view('admin.index');
-});
-
 Route::name('admin.')->group(function(){
-    Route::resource('admin/users', AdminUsersController::class);
+
+    Route::get('/admin', function(){
+        return view('admin.index');
+    });
+
+    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+    Route::group(['middleware'=>'admin'],function(){
+        Route::resource('/admin/users',AdminUsersController::class);
+        Route::resource('/admin/posts',AdminPostsController::class);
+    });
 });
