@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
+use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Role;
 use App\Models\User;
