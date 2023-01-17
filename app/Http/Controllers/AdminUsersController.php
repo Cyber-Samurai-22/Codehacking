@@ -49,7 +49,6 @@ class AdminUsersController extends Controller
         if(trim($request->password) == ''){
             $input = $request->except('password');
         } else{
-
             $input = $request->all();
             $input['password'] = bcrypt($request->password);
         }
