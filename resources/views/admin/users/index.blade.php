@@ -18,7 +18,7 @@
     <table class="table">
         <thead>
           <tr>
-            <th>Id</th>
+            <th>ID</th>
             <th>Photo</th>
             <th>Name</th>
             <th>Email</th>

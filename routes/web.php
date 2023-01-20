@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminCategoriesController;
 use App\Http\Controllers\AdminPostsController;
 use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -32,10 +34,11 @@ Route::name('admin.')->group(function(){
         return view('admin.index');
     });
 
-    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+    Route::get('logout', [LoginController::class, 'logout']);
 
     Route::group(['middleware'=>'admin'],function(){
         Route::resource('/admin/users',AdminUsersController::class);
         Route::resource('/admin/posts',AdminPostsController::class);
+        Route::resource('/admin/categories', AdminCategoriesController::class);
     });
 });
