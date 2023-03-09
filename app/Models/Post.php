@@ -4,18 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
+
 
     protected $fillable = [
         'user_id',
         'category_id',
         'photo_id',
         'title',
-        'body'
+        'body',
+        'slug'
     ];
+
+    public function sluggable(): array
+    {
+        return[
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     public function user(){
         return $this->belongsTo('App\Models\User');
@@ -28,4 +41,13 @@ class Post extends Model
     public function category(){
         return $this->belongsTo('App\Models\Category');
     }
+
+    public function comments(){
+       return $this->hasMany('App\Models\Comment');
+    }
+
+    public function photoPlaceholder(){
+        return 'http://placehold.it/700x200';
+    }
+
 }

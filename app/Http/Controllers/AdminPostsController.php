@@ -6,6 +6,7 @@ use App\Http\Requests\PostsCreateRequest;
 use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -20,7 +21,7 @@ class AdminPostsController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
+        $posts = Post::paginate(5);
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -55,7 +56,7 @@ class AdminPostsController extends Controller
         }
     $user->posts()->create($input);
 
-        Session::flash('created_post', 'The user has been created');
+        Session::flash('created_post', 'The post has been created');
 
         return redirect('/admin/posts');
     }
@@ -122,7 +123,16 @@ class AdminPostsController extends Controller
         unlink(public_path() . $post->photo->file);
         $post->delete();
 
-        Session::flash('deleted_post', 'The user has been deleted');
+        Session::flash('deleted_post', 'The post has been deleted');
         return redirect('/admin/posts');
     }
+
+    public function post($slug)
+    {
+        $post = Post::whereSlug($slug)->firstOrFail();
+        $categories = Category::all();
+        $comments = $post->comments()->whereIsActive(1)->get();
+        return view('post', compact('post', 'comments', 'categories'));
+    }
+
 }
