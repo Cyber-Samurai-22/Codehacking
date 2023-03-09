@@ -5,9 +5,7 @@
     <h1>Admin</h1>
 
     <canvas id="myChart"></canvas>
-
 @endsection
-
 
 @section('scripts')
 
@@ -15,7 +13,6 @@
 
     <script>
         const ctx = document.getElementById('myChart');
-
         new Chart(ctx, {
             type: 'bar',
             data: {

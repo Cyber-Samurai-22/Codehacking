@@ -72,6 +72,7 @@ class AdminCategoriesController extends Controller
         return redirect('/admin/categories');
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
