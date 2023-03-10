@@ -14,10 +14,8 @@
                 <a href="#">{{$post->title}}</a>
             </h2>
             <p class="lead">by {{$post->user->name}}</p>
+            <img height="300" src="{{$post->photo ? $post->photo->file : 'http:/placehold.it/400x400'}}" alt="">
             <p><span class="glyphicon glyphicon-time"></span> {{$post->created_at->diffForHumans()}}</p>
-            <hr>
-            <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-            <hr>
             <p>{{Str::limit($post->body, 100)}}</p>
             <a class="btn btn-primary" href="/post/{{$post->slug}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                     <hr>

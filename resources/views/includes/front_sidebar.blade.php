@@ -32,9 +32,9 @@
         <!-- /.row -->
     </div>
 
-    <!-- Side Widget Well -->
-    <div class="well">
-        <h4>Side Widget Well</h4>
-    </div>
+{{--    <!-- Side Widget Well -->--}}
+{{--    <div class="well">--}}
+{{--        <h4>Side Widget Well</h4>--}}
+{{--    </div>--}}
 
-</div>
+{{--</div>--}}
