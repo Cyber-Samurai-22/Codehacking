@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const { merge } = require('webpack-merge');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,8 +12,18 @@ const mix = require('laravel-mix');
  |
  */
 
+
+
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .postCss('resources/css/app.css', 'public/css', [
+        //
+    ]);
+
+mix.override((config) => {
+    config.resolve.alias = merge(config.resolve.alias, {
+        vue$: 'vue/dist/vue.esm-bundler.js',
+    });
+});
 
 mix.styles([
     'resources/assets/css/libs/blog-post.css',

@@ -6,6 +6,9 @@ use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentsRequest;
+use Illuminate\Support\Facades\Validator;
+
 
 class PostCommentsController extends Controller
 {
@@ -38,7 +41,7 @@ class PostCommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentsRequest $request)
     {
         $user = Auth::user();
 
@@ -49,12 +52,23 @@ class PostCommentsController extends Controller
             'photo' => $user->photo ? $user->photo->file : '',
             'body' => $request->body
         ];
+
+        $validator = Validator::make($request->all(), [
+            'body' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
         Comment::create($data);
 
         $request->session()->flash('comment_message', 'Your comment has been submitted and is waiting moderation');
 
-        return redirect()->back();
+        return back();
     }
+
+
 
     /**
      * Display the specified resource.

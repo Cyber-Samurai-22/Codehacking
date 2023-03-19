@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     @if(count($comments) > 0)
 
     <h1>Comments</h1>
@@ -22,7 +23,7 @@
                     <td>{{$comment->author}}</td>
                     <td>{{$comment->email}}</td>
                     <td>{{$comment->body}}</td>
-                    <td><a href="{{route('home.post', $comment->post->id)}}">View Post</a></td>
+                    <td><a href="{{route('home.post', $comment->post->slug)}}">View Post</a></td>
                     <td><a href="{{route('admin.replies.show', $comment->id)}}">View Replies</a></td>
                     <td>
                         @if($comment->is_active == 1)

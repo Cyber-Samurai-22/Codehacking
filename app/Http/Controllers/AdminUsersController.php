@@ -20,7 +20,6 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
         $users = User::paginate(10);
 
         return view('admin.users.index', compact('users'));
@@ -47,6 +46,9 @@ class AdminUsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
+        if(User::where('email', $request->email)->exists()) {
+            return redirect()->back()->withErrors(['email' => 'Email already exists.']);
+        }
         if(trim($request->password) == ''){
             $input = $request->except('password');
         } else{
@@ -59,6 +61,7 @@ class AdminUsersController extends Controller
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
         }
+
         User::create($input);
 
         Session::flash('created_user', 'The user has been created');
@@ -113,7 +116,7 @@ class AdminUsersController extends Controller
             $input['password'] = bcrypt($request->password);
         }
 
-        if($file = $request->file('photo_id')){
+        if(!empty($request->file()) && $file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);
 
@@ -135,13 +138,27 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    private function getLocalFilePath($url)
+    {
+        $publicUrl = asset('/', true);
+        $relativePath = str_replace($publicUrl, '', $url);
+        return str_replace('/', DIRECTORY_SEPARATOR, $relativePath);
+    }
+
+
     public function destroy($id)
     {
-        //
         $user = User::findOrFail($id);
-             unlink(public_path() . $user->photo->file);
+        if ($user->photo && $user->photo->file) {
+            $filePath = public_path() . $this->getLocalFilePath($user->photo->file);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            } else {
+                error_log("File not found: " . $filePath);
+            }
+        }
         $user->delete();
-
         Session::flash('deleted_user', 'The user has been deleted');
             return redirect('/admin/users');
     }

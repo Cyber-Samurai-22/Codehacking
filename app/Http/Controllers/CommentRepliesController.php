@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\CommentReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentsReplyRequest;
 
 class CommentRepliesController extends Controller
 {
@@ -40,23 +41,21 @@ class CommentRepliesController extends Controller
         //
     }
 
-    public function createReply(Request $request){
-
+    public function createReply(Comment $comment, CommentsReplyRequest $request)
+    {
         $user = Auth::user();
-
-        $data = [
-            'comment_id' => $request->comment_id,
+        $body = $request->input('reply_body');
+        $commentReply = $comment->replies()->create([
+            'comment_id' => $comment->id,
             'author' => $user->name,
             'email' => $user->email,
             'photo' => $user->photo->file,
-            'body' => $request->body
-        ];
-        CommentReply::create($data);
-
+            'body' => $request->reply_body,
+        ]);
         $request->session()->flash('reply_message', 'Your reply has been submitted and is waiting moderation');
-
         return redirect()->back();
     }
+
 
     /**
      * Display the specified resource.
@@ -67,11 +66,7 @@ class CommentRepliesController extends Controller
     public function show($id)
     {
         $comment = Comment::findOrFail($id);
-
-        $replies = $comment->replies;
-
-        return view('admin.comments.replies.show', compact('replies'));
-
+        return view('admin.comments.replies.show', compact('comment'));
     }
 
     /**
@@ -95,9 +90,7 @@ class CommentRepliesController extends Controller
     public function update(Request $request, $id)
     {
         CommentReply::findOrFail($id)->update($request->all());
-
         return redirect()->back();
-
     }
 
     /**

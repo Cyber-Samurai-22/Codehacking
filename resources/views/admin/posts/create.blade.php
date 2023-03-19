@@ -1,10 +1,7 @@
 @extends('layouts.admin')
-
 @section('content')
-
     <h1>Create Post</h1>
-
-<div class="row">
+    <div class="row">
     {!! Form::open(['method'=>'POST', 'action'=> ['\App\Http\Controllers\AdminPostsController@store'], 'files'=>true]) !!}
     <div class="form-group">
         {!! Form::label('title', 'Title:') !!}
@@ -27,9 +24,7 @@
     </div>
     {!! Form::close() !!}
 </div>
-
-<div class="row">
+    <div class="row">
     @include('includes.form_error')
 </div>
-
 @stop

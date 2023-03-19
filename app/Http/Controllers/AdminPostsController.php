@@ -98,18 +98,32 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        if($file = $request->file('photo_id')) {
+        if ($file = $request->file('photo_id')) {
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);
             $photo = Photo::create(['file' => $name]);
             $input['photo_id'] = $photo->id;
         }
-        Auth::user()->posts()->whereId($id)->first()->update($input);
+
+        $post = Auth::user()->posts()->find($id);
+
+        if (!$post) {
+            return redirect()->back()->withErrors(['Post not found']);
+        }
+
+        // Remove the 'photo_id' field from the $input array if it's not set
+        if (!isset($input['photo_id'])) {
+            unset($input['photo_id']);
+        }
+
+        $post->update($input);
 
         Session::flash('updated_post', 'The post has been updated');
 
         return redirect('/admin/posts');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -117,15 +131,32 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    private function getLocalFilePath($url)
+    {
+        $publicUrl = asset('/', true);
+        $relativePath = str_replace($publicUrl, '', $url);
+        return str_replace('/', DIRECTORY_SEPARATOR, $relativePath);
+    }
+
+
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        unlink(public_path() . $post->photo->file);
+        if ($post->photo && $post->photo->file) {
+            $filePath = public_path() . $this->getLocalFilePath($post->photo->file);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            } else {
+                error_log("File not found: " . $filePath);
+            }
+        }
         $post->delete();
 
         Session::flash('deleted_post', 'The post has been deleted');
         return redirect('/admin/posts');
     }
+
 
     public function post($slug)
     {
@@ -134,5 +165,4 @@ class AdminPostsController extends Controller
         $comments = $post->comments()->whereIsActive(1)->get();
         return view('post', compact('post', 'comments', 'categories'));
     }
-
 }

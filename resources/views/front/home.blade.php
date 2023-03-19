@@ -1,18 +1,12 @@
 @extends('layouts.blog-home')
-
 @section('content')
-
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-
             <!-- First Blog Post -->
-
             @if($posts)
                 @foreach($posts as $post)
-                    <h2>
-                <a href="#">{{$post->title}}</a>
-            </h2>
+                    <h2><a href="/post/{{$post->slug}}">{{$post->title}}</a></h2>
             <p class="lead">by {{$post->user->name}}</p>
             <img height="300" src="{{$post->photo ? $post->photo->file : 'http:/placehold.it/400x400'}}" alt="">
             <p><span class="glyphicon glyphicon-time"></span> {{$post->created_at->diffForHumans()}}</p>

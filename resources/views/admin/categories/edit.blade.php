@@ -1,9 +1,6 @@
 @extends('layouts.admin')
-
 @section('content')
-
     <h1>Categories</h1>
-
     <div class="col-sm-6">
         {!! Form::model($category, ['method'=>'PATCH', 'action'=>['\App\Http\Controllers\AdminCategoriesController@update', $category->id]]) !!}
         <div class="form-group">

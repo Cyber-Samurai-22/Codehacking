@@ -1,0 +1,89 @@
+[33mcommit 1cfd06a5d36420b460db10f6392b2407b8bb7042[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Fri Mar 10 17:00:35 2023 +0000
+
+    database update
+
+[33mcommit 8f32109ab65186a7e2c0bdf12f6e32d0a449cb1f[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Fri Mar 10 16:42:18 2023 +0000
+
+    images on home page updated
+
+[33mcommit b590e2cc4c996759d651f1e1685a0cdd9e70f434[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Thu Mar 9 23:50:34 2023 +0000
+
+    Project completed 2
+
+[33mcommit f2f244c68e21aa528fdd978f00c5692cc1b06bec[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Thu Mar 9 23:36:24 2023 +0000
+
+    Project completed
+
+[33mcommit 19fdaf085051aeeef068d8869f395be694232928[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Sat Jan 21 10:33:01 2023 +0000
+
+    categories are working 100%
+
+[33mcommit 519f1a4b3a213c58ea0208e490c422305577fc90[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Fri Jan 20 19:19:30 2023 +0000
+
+    able to create categories
+
+[33mcommit 3dd509ce93a40562c91c7c4d5286ffdb3d07fee2[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Tue Jan 17 21:17:05 2023 +0000
+
+    able to create posts with dynamic categories
+
+[33mcommit 8ebe92d9fb0aa56ab1db8f4a911ccd09cac930b9[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Tue Jan 17 20:54:05 2023 +0000
+
+    able to create posts with dynamic categories
+
+[33mcommit f8c1aca66fca2eb2b217b15e187a25c816ce50d4[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Tue Jan 17 20:28:24 2023 +0000
+
+    able to create posts with static category
+
+[33mcommit 1d5f28312841235edca5f4d43cb5ddc2e974ef19[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Wed Dec 28 19:04:37 2022 +0000
+
+    users section  working except security
+
+[33mcommit a21e95b1b0d9f3a79a8a10b4f4cc8f83c37277bc[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Sat Dec 3 17:05:58 2022 +0000
+
+    users with photos working
+
+[33mcommit 72eb6fbf9f0ce03a5981d8919029534048e81d5c[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Sat Dec 3 16:32:17 2022 +0000
+
+    users page is working wihtout photos
+
+[33mcommit 611b1de7af4ca4062db5500dcf750a8c23539f64[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Sat Dec 3 15:22:12 2022 +0000
+
+    Users Request has been done
+
+[33mcommit 8e8fd544c49fcb7a2f953fc3a9a65716f21d0826[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Tue Nov 29 17:56:04 2022 +0000
+
+    admin master page setup
+
+[33mcommit 66ae2a7408eeaf17dc6210ec3d2257518a6be809[m
+Author: Cyber-Samurai-22 <scutelnic.666@gmail.com>
+Date:   Sat Nov 12 16:17:28 2022 +0000
+
+    admin views created
